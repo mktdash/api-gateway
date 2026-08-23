@@ -1,0 +1,42 @@
+# dependencies
+node_modules/
+
+# logs
+logs/
+*.log
+npm-debug.log*
+pnpm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# build output
+dist/
+build/
+*.tsbuildinfo
+
+# test / coverage
+coverage/
+.nyc_output/
+
+# editor / OS
+.DS_Store
+.vscode/*
+!.vscode/extensions.json
+.idea/
+
+# pnpm
+.pnpm-store/
+
+# runtime data
+pids/
+*.pid
+*.seed
+
+# env files (can opt-in for committing if needed)
+.env
+.env.*
+!.env.example
+
+# CLAUDE
+CLAUDE.md
+.claude/
