@@ -37,6 +37,7 @@
     "@eslint/js": "^10.0.1",
     "@types/node": "^26.2.0",
     "@vitest/coverage-v8": "^4.1.11",
+    "dependency-cruiser": "^18.2.0",
     "eslint": "^10.9.0",
     "typescript": "^7.0.2",
     "typescript-eslint": "^8.67.0",
