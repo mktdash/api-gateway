@@ -24,6 +24,7 @@
   "packageManager": "pnpm@11.5.3",
   "dependencies": {
     "fastify": "^5.12.1",
-    "fastify-plugin": "^6.0.0"
+    "fastify-plugin": "^6.0.0",
+    "fastify-type-provider-zod": "^7.0.0"
   }
 }
