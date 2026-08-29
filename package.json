@@ -1,14 +1,40 @@
 {
   "name": "api-gateway",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+  "private": true,
+  "license": "UNLICENSED",
+  "description": "Argus — the Marketing Dashboard platform edge: routing table and identity trust boundary.",
+  "keywords": [
+    "api-gateway",
+    "fastify",
+    "reverse-proxy",
+    "jwks",
+    "mktdash"
+  ],
+  "author": "Marketing Dashboard platform team",
+  "type": "module",
+  "imports": {
+    "#config/*": {
+      "source": "./src/config/*.ts",
+      "default": "./dist/config/*.js"
+    },
+    "#lib/*": {
+      "source": "./src/lib/*.ts",
+      "default": "./dist/lib/*.js"
+    },
+    "#plugins/*": {
+      "source": "./src/plugins/*.ts",
+      "default": "./dist/plugins/*.js"
+    },
+    "#routes/*": {
+      "source": "./src/routes/*.ts",
+      "default": "./dist/routes/*.js"
+    },
+    "#types/*": {
+      "source": "./src/types/*.ts",
+      "default": "./dist/types/*.js"
+    }
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
   "devEngines": {
     "packageManager": {
       "name": "pnpm",
@@ -16,30 +42,51 @@
       "onFail": "download"
     }
   },
-  "type": "module",
   "engines": {
     "node": ">=22.20.0",
     "pnpm": ">=11.5.3"
   },
   "packageManager": "pnpm@11.5.3",
+  "scripts": {
+    "dev": "NODE_ENV=development node --watch --env-file=.env.development --conditions=source src/server.ts",
+    "build": "tsc -p tsconfig.build.json",
+    "start": "NODE_ENV=production node --env-file-if-exists=.env.production dist/server.js",
+    "prod": "pnpm run build && pnpm run start",
+    "typecheck": "tsc -p tsconfig.json",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "test": "vitest run",
+    "test:unit": "vitest run src",
+    "test:integration": "vitest run test",
+    "test:watch": "vitest",
+    "test:coverage": "vitest run --coverage",
+    "depcruise": "node scripts/check-architecture.ts",
+    "depcruise:graph": "depcruise src --config .dependency-cruiser.cjs --output-type dot",
+    "depcruise:raw": "depcruise src --config .dependency-cruiser.cjs"
+  },
   "dependencies": {
     "@fastify/cors": "^11.3.0",
     "@fastify/helmet": "^13.1.1",
     "@fastify/http-proxy": "^11.6.1",
     "@fastify/rate-limit": "^11.2.0",
-    "fastify": "^5.12.1",
+    "@fastify/under-pressure": "^9.1.0",
+    "close-with-grace": "^2.5.0",
+    "fastify": "~5.12.1",
     "fastify-plugin": "^6.0.0",
     "fastify-type-provider-zod": "^7.0.0",
+    "ioredis": "^6.0.0",
+    "jose": "^6.2.10",
     "pino": "^10.3.1",
     "zod": "^4.4.3"
   },
   "devDependencies": {
     "@eslint/js": "^10.0.1",
-    "@types/node": "^26.2.0",
+    "@types/node": "^22.20.0",
     "@vitest/coverage-v8": "^4.1.11",
     "dependency-cruiser": "^18.2.0",
     "eslint": "^10.9.0",
-    "typescript": "^7.0.2",
+    "pino-pretty": "^13.1.3",
+    "typescript": "~6.0.3",
     "typescript-eslint": "^8.67.0",
     "vitest": "^4.1.11"
   }
